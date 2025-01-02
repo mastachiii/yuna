@@ -30,7 +30,7 @@ model Folder {
   files          File[]
   subFolders     Folder[] @relation("folders")
   ownerId        String
-  parentFolderId String
+  parentFolderId String?
 }
 
 model File {
