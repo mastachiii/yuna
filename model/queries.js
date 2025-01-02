@@ -18,7 +18,7 @@ class User {
     async getAllUsers() {
         const users = await prisma.user.findMany({
             include: {
-                folders: true,
+                rootFolders: true,
                 files: true,
             },
         });
@@ -59,7 +59,7 @@ class Folder {
         });
     }
 
-    async createSubFolder({ name, ownerId, parentFolderId }) {
+    async createSubFolder({ name, parentFolderId }) {
         await prisma.folder.create({
             data: {
                 name,
@@ -68,11 +68,6 @@ class Folder {
                 parentFolder: {
                     connect: {
                         id: parentFolderId,
-                    },
-                },
-                owner: {
-                    connect: {
-                        id: ownerId,
                     },
                 },
             },
@@ -101,24 +96,14 @@ class Folder {
 const users = new User();
 const folders = new Folder();
 
-// folders.createSubFolder({
-//     name: "mastachii-sub",
-//     ownerId: "94074629-1042-41c3-8664-b3dafa0c771a",
-//     parentFolderId: "bc277d5d-436a-42cc-bbba-70982dc013bc",
-// });
+// folders.createFolder({ name: "mastachii-main", ownerId: "94074629-1042-41c3-8664-b3dafa0c771a" });
+// folders.createFolder({ name: "breezy_786-main", ownerId: "65f02d12-bc54-4c6d-87df-406556757cc8" });
+// folders.createFolder({ name: "hasenborg-main", ownerId: "09ed2380-64bb-4fc7-8aac-17622ccabab4" });
 
-// folders.createSubFolder({
-//     name: "hasenborg-sub",
-//     ownerId: "09ed2380-64bb-4fc7-8aac-17622ccabab4",
-//     parentFolderId: "8ff1e00b-56a5-4f73-ace2-2a6e5c9fcd86",
-// });
+// folders.createSubFolder({ name: "mastachii-sub", parentFolderId: "c5a10b4c-5026-4c15-9b64-01fcda93b72d" });
+// folders.createSubFolder({ name: "breezy-sub", parentFolderId: "18fd5f4b-2fdd-4f4e-aadf-fb3bb0ab3a03" });
+// folders.createSubFolder({ name: "hasenborg-sub", parentFolderId: "54195e15-4183-428f-8394-29c1cc16f7a3" });
 
-// folders.createSubFolder({
-//     name: "breezy_786-sub",
-//     ownerId: "65f02d12-bc54-4c6d-87df-406556757cc8",
-//     parentFolderId: "25c1301a-d6ae-4b29-8185-56535ca29e0a",
-// });
-
-folders.deleteFolder("fce4de2b-e819-4334-a211-76ec6f309807");
-folders.getAllFolders();
+// users.getAllUsers();
+// folders.getAllFolders();
 // users.getUser("mastachii273@gmail.com");
