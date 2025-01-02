@@ -14,22 +14,22 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  username String
-  password String
-  email    String   @unique
-  folders  Folder[]
-  files    File[]
+  id          String   @id @default(uuid())
+  username    String
+  password    String
+  email       String   @unique
+  rootFolders Folder[]
+  files       File[]
 }
 
 model Folder {
   id             String   @id @default(uuid())
-  owner          User     @relation(fields: [ownerId], references: [id])
+  owner          User?    @relation(fields: [ownerId], references: [id])
   name           String
-  parentFolder   Folder?  @relation("folders", fields: [parentFolderId], references: [id])
+  parentFolder   Folder?  @relation("folders", fields: [parentFolderId], references: [id], onDelete: Cascade)
   files          File[]
   subFolders     Folder[] @relation("folders")
-  ownerId        String
+  ownerId        String?
   parentFolderId String?
 }
 
