@@ -105,6 +105,15 @@ class Folder {
         console.log(folder);
     }
 
+    async renameFolder({ id, name }) {
+        await prisma.folder.update({
+            where: { id },
+            data: {
+                name,
+            },
+        });
+    }
+
     async deleteFolder(id) {
         await prisma.folder.delete({
             where: { id },
@@ -131,6 +140,29 @@ class File {
         });
     }
 
+    async getFile(id) {
+        const file = await prisma.file.findUnique({
+            where: { id },
+        });
+
+        console.log(file);
+    }
+
+    async getAllFiles() {
+        const files = await prisma.file.findMany();
+
+        console.log(files);
+    }
+
+    async renameFile({ id, name }) {
+        await prisma.file.update({
+            where: { id },
+            data: {
+                name,
+            },
+        });
+    }
+
     async deleteFile(id) {
         await prisma.file.delete({
             where: { id },
@@ -141,10 +173,3 @@ class File {
 const users = new User();
 const folders = new Folder();
 const files = new File();
-
-// files.addFile({ name: "app.js", ownerId: "94074629-1042-41c3-8664-b3dafa0c771a", parentFolderId: '1ee45d37-277d-442c-b9f7-5310af229d91' });
-
-// users.getAllUsers();
-// files.deleteFile("24293451-653a-4ce9-920b-f9cbf9819f00");
-folders.getFolder("1ee45d37-277d-442c-b9f7-5310af229d91");
-// users.getUser("94074629-1042-41c3-8664-b3dafa0c771a");
