@@ -18,20 +18,9 @@ class User {
     async getAllUsers() {
         const users = await prisma.user.findMany({
             include: {
-                rootFolders: true,
-                files: true,
-            },
-        });
-
-        console.log(users);
-    }
-
-    async getUser(email) {
-        const user = await prisma.user.findUnique({
-            where: { email },
-            include: {
                 rootFolders: {
                     include: {
+                        files: true,
                         subFolders: true,
                     },
                 },
@@ -39,7 +28,24 @@ class User {
             },
         });
 
-        console.log(user);
+        console.dir(users, { depth: null });
+    }
+
+    async getUser(id) {
+        const user = await prisma.user.findUnique({
+            where: { id },
+            include: {
+                rootFolders: {
+                    include: {
+                        files: true,
+                        subFolders: true,
+                    },
+                },
+                files: true,
+            },
+        });
+
+        console.dir(user, { depth: null });
     }
 }
 
@@ -86,6 +92,19 @@ class Folder {
         console.log(folders);
     }
 
+    async getFolder(id) {
+        const folder = await prisma.folder.findUnique({
+            where: { id },
+            include: {
+                subFolders: true,
+                files: true,
+                owner: true,
+            },
+        });
+
+        console.log(folder);
+    }
+
     async deleteFolder(id) {
         await prisma.folder.delete({
             where: { id },
@@ -93,17 +112,39 @@ class Folder {
     }
 }
 
+class File {
+    async addFile({ name, ownerId, parentFolderId }) {
+        await prisma.file.create({
+            data: {
+                name,
+                addedTo: {
+                    connect: {
+                        id: parentFolderId,
+                    },
+                },
+                owner: {
+                    connect: {
+                        id: ownerId,
+                    },
+                },
+            },
+        });
+    }
+
+    async deleteFile(id) {
+        await prisma.file.delete({
+            where: { id },
+        });
+    }
+}
+
 const users = new User();
 const folders = new Folder();
+const files = new File();
 
-// folders.createFolder({ name: "mastachii-main", ownerId: "94074629-1042-41c3-8664-b3dafa0c771a" });
-// folders.createFolder({ name: "breezy_786-main", ownerId: "65f02d12-bc54-4c6d-87df-406556757cc8" });
-// folders.createFolder({ name: "hasenborg-main", ownerId: "09ed2380-64bb-4fc7-8aac-17622ccabab4" });
-
-// folders.createSubFolder({ name: "mastachii-sub", parentFolderId: "c5a10b4c-5026-4c15-9b64-01fcda93b72d" });
-// folders.createSubFolder({ name: "breezy-sub", parentFolderId: "18fd5f4b-2fdd-4f4e-aadf-fb3bb0ab3a03" });
-// folders.createSubFolder({ name: "hasenborg-sub", parentFolderId: "54195e15-4183-428f-8394-29c1cc16f7a3" });
+// files.addFile({ name: "app.js", ownerId: "94074629-1042-41c3-8664-b3dafa0c771a", parentFolderId: '1ee45d37-277d-442c-b9f7-5310af229d91' });
 
 // users.getAllUsers();
-// folders.getAllFolders();
-// users.getUser("mastachii273@gmail.com");
+// files.deleteFile("24293451-653a-4ce9-920b-f9cbf9819f00");
+folders.getFolder("1ee45d37-277d-442c-b9f7-5310af229d91");
+// users.getUser("94074629-1042-41c3-8664-b3dafa0c771a");
