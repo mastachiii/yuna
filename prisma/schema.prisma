@@ -12,3 +12,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String   @id @default(uuid())
+  username String
+  password String
+  email    String   @unique
+  folders  Folder[]
+  files    File[]
+}
+
+model Folder {
+  id             String   @id @default(uuid())
+  owner          User     @relation(fields: [ownerId], references: [id])
+  name           String
+  parentFolder   Folder?  @relation("folders", fields: [parentFolderId], references: [id])
+  files          File[]
+  subFolders     Folder[] @relation("folders")
+  ownerId        String
+  parentFolderId String
+}
+
+model File {
+  id      String   @id @default(uuid())
+  owner   User     @relation(fields: [ownerId], references: [id])
+  name    String
+  addedTo Folder[]
+  ownerId String
+}
