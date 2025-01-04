@@ -10,7 +10,7 @@ class User {
                 username,
                 password,
                 email,
-                folders: {},
+                rootFolders: {},
                 files: {},
             },
         });
@@ -52,6 +52,14 @@ class User {
     async getUserByUsername(username) {
         const user = await prisma.user.findUnique({
             where: { username },
+        });
+
+        return user;
+    }
+
+    async getUserByEmail(email) {
+        const user = await prisma.user.findUnique({
+            where: { email },
         });
 
         return user;

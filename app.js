@@ -6,6 +6,9 @@ const passport = require("passport");
 const passportConfig = require("./passport/passport");
 require("dotenv").config();
 
+// Routes
+const signUp = require("./routes/signUpRoutes");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -26,9 +29,16 @@ app.use(
         }),
     })
 );
+app.use(express.urlencoded({ extended: true }));
+app.use("/sign-up", signUp);
 
+// GET
 app.get("/", (req, res) => res.send("<h1>Hello World</h1>"));
 
+// POST
+app.post("/sign-up", (req, res) => console.log(req.body));
+
+// Error Handling
 app.use((err, req, res, next) => {
     console.error(err);
     res.json(err);
