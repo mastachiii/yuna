@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id          String   @id @default(uuid())
-  username    String
+  username    String   @unique
   password    String
   email       String   @unique
   rootFolders Folder[]
@@ -39,4 +39,11 @@ model File {
   name    String
   addedTo Folder[]
   ownerId String
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
 }

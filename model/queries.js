@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { use } = require("passport");
 
 const prisma = new PrismaClient();
 
@@ -31,7 +32,7 @@ class User {
         console.dir(users, { depth: null });
     }
 
-    async getUser(id) {
+    async getUserById(id) {
         const user = await prisma.user.findUnique({
             where: { id },
             include: {
@@ -45,7 +46,15 @@ class User {
             },
         });
 
-        console.dir(user, { depth: null });
+        return user;
+    }
+
+    async getUserByUsername(username) {
+        const user = await prisma.user.findUnique({
+            where: { username },
+        });
+
+        return user;
     }
 }
 
@@ -170,6 +179,8 @@ class File {
     }
 }
 
-const users = new User();
-const folders = new Folder();
-const files = new File();
+module.exports = {
+    User,
+    Folder,
+    File,
+};
