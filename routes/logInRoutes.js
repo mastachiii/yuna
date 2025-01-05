@@ -7,8 +7,6 @@ const router = express.Router();
 
 router.get("/", auth.isNotAuthenticated, controller.getLogInForm);
 
-router.post("/", passport.authenticate("local", { failureRedirect: "/log-in", failureMessage: true }), (req, res) => {
-    res.send("LOGGED IN");
-});
+router.post("/", passport.authenticate("local", { failureRedirect: "/log-in", failureMessage: true }), controller.logInUser);
 
 module.exports = router;

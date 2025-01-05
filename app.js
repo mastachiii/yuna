@@ -39,9 +39,18 @@ app.use("/log-in", logIn);
 app.use("/folders", folders);
 
 // GET
-app.get("/", auth.isAuthenticated, (req, res) => res.render("index"));
+app.get("/", auth.isAuthenticated, (req, res) => res.render("index", { rootFolders: req.user.rootFolders }));
 
 app.get("/secret", auth.isAuthenticated, (req, res) => res.send("zuccess"));
+
+// POST
+app.get("/log-out", auth.isAuthenticated, (req, res) => {
+    req.logout(err => {
+        if (err) next(err);
+
+        res.redirect("/");
+    });
+});
 
 // Error Handling
 app.use((err, req, res, next) => {
