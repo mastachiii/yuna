@@ -10,7 +10,7 @@ require("dotenv").config();
 // Routes
 const signUp = require("./routes/signUpRoutes");
 const logIn = require("./routes/logInRoutes");
-const { render } = require("ejs");
+const folders = require("./routes/folderRoutes");
 
 const app = express();
 
@@ -36,9 +36,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.authenticate("session"));
 app.use("/sign-up", signUp);
 app.use("/log-in", logIn);
+app.use("/folders", folders);
 
 // GET
-app.get("/", auth.isAuthenticated, (req, res) => res.send("Homepage"));
+app.get("/", auth.isAuthenticated, (req, res) => res.render("index"));
 
 app.get("/secret", auth.isAuthenticated, (req, res) => res.send("zuccess"));
 
