@@ -4,8 +4,9 @@ const db = new Folder();
 
 async function getFolder(req, res, next) {
     try {
-        const id = req.params.id;
-        res.send("yes");
+        const folder = await db.getFolder(req.params.id);
+
+        res.render("folder", { folder });
     } catch (err) {
         next(err);
     }
@@ -13,9 +14,9 @@ async function getFolder(req, res, next) {
 
 async function createFolder(req, res, next) {
     try {
-        await db.createFolder({ name: req.body.folder, ownerId: req.user.id });
+        await db.createSubFolder({ name: req.body.folder, parentFolderId: req.params.id });
 
-        res.redirect("/");
+        res.redirect("");
     } catch (err) {
         next(err);
     }

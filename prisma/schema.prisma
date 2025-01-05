@@ -28,7 +28,7 @@ model Folder {
   parentFolder   Folder?  @relation("folders", fields: [parentFolderId], references: [id], onDelete: Cascade)
   files          File[]
   subFolders     Folder[] @relation("folders")
-  ownerId        String   @unique
+  ownerId        String?  @unique
   parentFolderId String?
   date           String
 }

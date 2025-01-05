@@ -6,6 +6,14 @@
         <title>Document</title>
     </head>
     <body>
-        <% console.log(locals) %>
+        <h1><%= folder.name %></h1>
+        <% folder.subFolders.forEach(folder => {%>
+        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+        <% }) %>
+        <form action="" method="post">
+            <label for="folder">New Folder</label>
+            <input type="text" name="folder" id="folder" />
+            <button>add</button>
+        </form>
     </body>
 </html>

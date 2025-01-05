@@ -82,7 +82,7 @@ class Folder {
         });
     }
 
-    async createSubFolder({ name, parentFolderId }) {
+    async createSubFolder({ name, parentFolderId, ownerId }) {
         await prisma.folder.create({
             data: {
                 name,
@@ -93,6 +93,7 @@ class Folder {
                         id: parentFolderId,
                     },
                 },
+                date: format(new Date(), "Pp"),
             },
         });
     }
@@ -119,7 +120,7 @@ class Folder {
             },
         });
 
-        console.log(folder);
+        return folder;
     }
 
     async renameFolder({ id, name }) {
