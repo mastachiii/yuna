@@ -42,13 +42,7 @@ class User {
         const user = await prisma.user.findUnique({
             where: { id },
             include: {
-                rootFolder: {
-                    include: {
-                        files: true,
-                        subFolders: true,
-                    },
-                },
-                files: true,
+                rootFolder: true,
             },
         });
 

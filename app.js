@@ -39,7 +39,7 @@ app.use("/log-in", logIn);
 app.use("/folders", folders);
 
 // GET
-app.get("/", auth.isAuthenticated, (req, res) => res.render("index", { rootFolders: req.user.rootFolders }));
+app.get("/", auth.isAuthenticated, (req, res) => res.redirect(`/folders/${req.user.rootFolder.id}`));
 
 app.get("/secret", auth.isAuthenticated, (req, res) => res.send("zuccess"));
 
@@ -54,7 +54,7 @@ app.get("/log-out", auth.isAuthenticated, (req, res) => {
 
 // Error Handling
 app.use((err, req, res, next) => {
-    console.log(err)
+    console.log(err);
     res.json(err);
 });
 

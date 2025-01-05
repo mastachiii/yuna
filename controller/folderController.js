@@ -1,6 +1,11 @@
+const { Folder } = require("../model/queries");
+
+const db = new Folder();
+
 async function getFolder(req, res, next) {
     try {
-        console.log(req.user)
+        const id = req.params.id;
+        res.send("yes");
     } catch (err) {
         next(err);
     }
@@ -18,5 +23,5 @@ async function createFolder(req, res, next) {
 
 module.exports = {
     createFolder,
-    getFolder
+    getFolder,
 };
