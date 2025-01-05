@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { format } = require("date-fns");
 const { use } = require("passport");
 
 const prisma = new PrismaClient();
@@ -10,8 +11,14 @@ class User {
                 username,
                 password,
                 email,
-                rootFolders: {},
-                files: {},
+                rootFolder: {
+                    create: {
+                        name: username,
+                        files: {},
+                        subFolders: {},
+                        date: format(new Date(), "Pp"),
+                    },
+                },
             },
         });
     }
@@ -19,13 +26,12 @@ class User {
     async getAllUsers() {
         const users = await prisma.user.findMany({
             include: {
-                rootFolders: {
+                rootFolder: {
                     include: {
                         files: true,
                         subFolders: true,
                     },
                 },
-                files: true,
             },
         });
 
@@ -36,7 +42,7 @@ class User {
         const user = await prisma.user.findUnique({
             where: { id },
             include: {
-                rootFolders: {
+                rootFolder: {
                     include: {
                         files: true,
                         subFolders: true,

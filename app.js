@@ -54,6 +54,7 @@ app.get("/log-out", auth.isAuthenticated, (req, res) => {
 
 // Error Handling
 app.use((err, req, res, next) => {
+    console.log(err)
     res.json(err);
 });
 

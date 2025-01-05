@@ -5,9 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
     </head>
-    <% console.log(locals) %> <% rootFolders.forEach(folder => { %>
-    <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
-    <% }) %>
     <body>
         <form action="/folders" method="post">
             <label for="folder">New Folder</label>

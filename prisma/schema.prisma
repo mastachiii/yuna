@@ -30,7 +30,7 @@ model Folder {
   subFolders     Folder[] @relation("folders")
   ownerId        String   @unique
   parentFolderId String?
-  date           DateTime
+  date           String
 }
 
 model File {
@@ -38,7 +38,7 @@ model File {
   name    String
   addedTo Folder[]
   ownerId String
-  date    DateTime
+  date    String
 }
 
 model Session {
