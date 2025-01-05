@@ -1,9 +1,10 @@
 const express = require("express");
 const controller = require("../controller/signUpController");
+const auth = require("../helpers/authMiddleware");
 
 const router = express.Router();
 
-router.get("/", controller.getSignUpForm);
+router.get("/", auth.isNotAuthenticated, controller.getSignUpForm);
 
 router.post("/", controller.addUser);
 

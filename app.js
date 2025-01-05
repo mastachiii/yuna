@@ -4,12 +4,13 @@ const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const passport = require("passport");
 const passportConfig = require("./passport/passport");
-const isAuthenticated = require("./helpers/authMiddleware");
+const auth = require("./helpers/authMiddleware");
 require("dotenv").config();
 
 // Routes
 const signUp = require("./routes/signUpRoutes");
 const logIn = require("./routes/logInRoutes");
+const { render } = require("ejs");
 
 const app = express();
 
@@ -32,20 +33,17 @@ app.use(
     })
 );
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.authenticate("session"));
 app.use("/sign-up", signUp);
 app.use("/log-in", logIn);
 
 // GET
-app.get("/", (req, res) => res.send("<h1>Hello World</h1>"));
+app.get("/", auth.isAuthenticated, (req, res) => res.send("Homepage"));
 
-app.get("/secret", isAuthenticated, (req, res) => res.send("zuccess"));
-
-// POST
-app.post("/sign-up", (req, res) => console.log(req.body));
+app.get("/secret", auth.isAuthenticated, (req, res) => res.send("zuccess"));
 
 // Error Handling
 app.use((err, req, res, next) => {
-    console.error(err);
     res.json(err);
 });
 

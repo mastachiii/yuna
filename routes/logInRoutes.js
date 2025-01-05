@@ -1,10 +1,14 @@
 const express = require("express");
 const controller = require("../controller/logInController");
+const passport = require("passport");
+const auth = require("../helpers/authMiddleware");
 
 const router = express.Router();
 
-router.get("/", controller.getLogInForm);
+router.get("/", auth.isNotAuthenticated, controller.getLogInForm);
 
-router.post("/");
+router.post("/", passport.authenticate("local", { failureRedirect: "/log-in", failureMessage: true }), (req, res) => {
+    res.send("LOGGED IN");
+});
 
-module.exports = router
+module.exports = router;
