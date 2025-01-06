@@ -6,7 +6,7 @@ const { body, validationResult, check } = require("express-validator");
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
 const db = new File();
 
-async (req, res, next) => {
+async function addFile(req, res, next) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(401).send(errors.array());
@@ -18,8 +18,11 @@ async (req, res, next) => {
 
         const { data } = await supabase.storage.from("yuna").getPublicUrl(path);
 
+        const size = req.file.size > 1000000 ? `${req.file.size / 1000000} MB` : `${req.file.size / 1000} KB`;
+
         await db.addFile({
             name: req.file.originalname,
+            size,
             parentFolderId: req.body.folder,
             url: data.publicUrl,
         });
@@ -28,7 +31,7 @@ async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-};
+}
 
 async function getFile(req, res, next) {
     try {

@@ -30,9 +30,11 @@
             const UPLOAD_LIMIT = 50 * 1000000;
             const file = input.files[0];
 
-            alert("File can't be larger than 50MB");
+            if (file.size > UPLOAD_LIMIT) {
+                alert("File can't be larger than 50MB");
 
-            input.value = null;
+                input.value = null;
+            }
         }
     </script>
 </html>

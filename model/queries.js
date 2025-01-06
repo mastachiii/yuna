@@ -140,11 +140,12 @@ class Folder {
 }
 
 class File {
-    async addFile({ name, url, parentFolderId }) {
+    async addFile({ name, url, size, parentFolderId }) {
         await prisma.file.create({
             data: {
                 name,
                 url,
+                size,
                 date: format(new Date(), "Pp"),
                 addedTo: {
                     connect: {
