@@ -9,6 +9,10 @@
         <h1><%= folder.name %></h1>
         <% folder.subFolders.forEach(folder => {%>
         <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+        <form action="/folders/<%= folder.id %>/delete" method="post">
+            <input type="hidden" name="id" value="<%= folder.id %>" />
+            <button>DELETE</button>
+        </form>
         <% }) %>
         <!---->
         <% folder.files.forEach(file => { %>

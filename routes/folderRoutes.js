@@ -7,9 +7,9 @@ const db = new Folder();
 
 const router = express.Router();
 
-// TODO: prob a get request would query db for single folder then render it...
 router.get("/:id", auth.isAuthenticated, controller.getFolder);
 
 router.post("/:id", controller.createFolder);
+router.post("/:id/delete", controller.deleteFolder);
 
 module.exports = router;

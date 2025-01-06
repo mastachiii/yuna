@@ -22,7 +22,18 @@ async function createFolder(req, res, next) {
     }
 }
 
+async function deleteFolder(req, res, next) {
+    try {
+        await db.deleteFolder(req.body.id);
+
+        res.redirect("back");
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
     createFolder,
     getFolder,
+    deleteFolder,
 };
