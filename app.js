@@ -11,6 +11,7 @@ require("dotenv").config();
 const signUp = require("./routes/signUpRoutes");
 const logIn = require("./routes/logInRoutes");
 const folders = require("./routes/folderRoutes");
+const files = require("./routes/fileRoutes");
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         store: new PrismaSessionStore(new PrismaClient(), {
-            checkPeriod: 20 * 60 * 100000,
+            checkPeriod: 20 * 60 * 1000000,
             dbRecordIdIsSessionId: true,
             dbRecordIdFunction: undefined,
         }),
@@ -37,6 +38,7 @@ app.use(passport.authenticate("session"));
 app.use("/sign-up", signUp);
 app.use("/log-in", logIn);
 app.use("/folders", folders);
+app.use("/files", files);
 
 // GET
 app.get("/", auth.isAuthenticated, (req, res) => res.redirect(`/folders/${req.user.rootFolder.id}`));
