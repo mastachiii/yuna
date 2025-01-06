@@ -9,5 +9,6 @@ const router = express.Router();
 router.get("/:id", auth.isAuthenticated, controller.getFile);
 
 router.post("/", upload.single("file"), controller.addFile);
+router.post("/:id/delete", controller.deleteFile);
 
 module.exports = router;

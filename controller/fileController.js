@@ -43,7 +43,18 @@ async function getFile(req, res, next) {
     }
 }
 
+async function deleteFile(req, res, next) {
+    try {
+        await db.deleteFile(req.body.id);
+
+        res.redirect("/");
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
     addFile,
     getFile,
+    deleteFile,
 };

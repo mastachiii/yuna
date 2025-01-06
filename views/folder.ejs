@@ -23,6 +23,10 @@
         <!---->
         <% folder.files.forEach(file => { %>
         <a href="/files/<%= file.id %>"><%= file.name %></a>
+        <form action="/files/<%= file.id %>/delete" method="post">
+            <input type="hidden" name="id" value="<%= file.id %>" />
+            <button>DELETE</button>
+        </form>
         <% }) %>
         <form action="" method="post">
             <label for="folder">New Folder</label>
