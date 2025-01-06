@@ -160,7 +160,7 @@ class File {
             where: { id },
         });
 
-        console.log(file);
+        return file;
     }
 
     async getAllFiles() {

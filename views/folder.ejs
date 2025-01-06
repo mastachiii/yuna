@@ -7,8 +7,12 @@
     </head>
     <body>
         <h1><%= folder.name %></h1>
-        <% console.log(folder) %> <% folder.subFolders.forEach(folder => {%>
+        <% folder.subFolders.forEach(folder => {%>
         <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+        <% }) %>
+        <!---->
+        <% folder.files.forEach(file => { %>
+        <a href="/files/<%= file.id %>"><%= file.name %></a>
         <% }) %>
         <form action="" method="post">
             <label for="folder">New Folder</label>
