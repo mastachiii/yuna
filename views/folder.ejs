@@ -13,6 +13,12 @@
             <input type="hidden" name="id" value="<%= folder.id %>" />
             <button>DELETE</button>
         </form>
+        <!-- will change to a dialog similar to how gdrive does it-->
+        <form action="/folders/<%= folder.id %>/rename" method="post">
+            <input type="text" name="name" />
+            <input type="hidden" name="id" value="<%= folder.id %>" />
+            <button>RENAME</button>
+        </form>
         <% }) %>
         <!---->
         <% folder.files.forEach(file => { %>

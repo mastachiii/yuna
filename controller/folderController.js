@@ -26,7 +26,17 @@ async function deleteFolder(req, res, next) {
     try {
         await db.deleteFolder(req.body.id);
 
-        res.redirect("back");
+        res.redirect("/");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function renameFolder(req, res, next) {
+    try {
+        await db.renameFolder(req.body);
+
+        res.redirect("/");
     } catch (err) {
         next(err);
     }
@@ -36,4 +46,5 @@ module.exports = {
     createFolder,
     getFolder,
     deleteFolder,
+    renameFolder,
 };
