@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1><%= folder.name %></h1>
-        <% folder.subFolders.forEach(folder => {%>
+        <% console.log(folder) %> <% folder.subFolders.forEach(folder => {%>
         <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
         <% }) %>
         <form action="" method="post">
@@ -17,6 +17,7 @@
         </form>
         <form action="/files" method="post" enctype="multipart/form-data">
             <input type="file" name="file" />
+            <input type="hidden" name="folder" value="<%= folder.id %>" />
             <button>Submit</button>
         </form>
     </body>

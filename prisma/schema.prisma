@@ -36,8 +36,8 @@ model Folder {
 model File {
   id      String   @id @default(uuid())
   name    String
+  url     String
   addedTo Folder[]
-  ownerId String
   date    String
 }
 
