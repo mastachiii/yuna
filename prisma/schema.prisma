@@ -31,6 +31,7 @@ model Folder {
   ownerId        String?  @unique
   parentFolderId String?
   date           String
+  Link           Link[]
 }
 
 model File {
@@ -40,6 +41,14 @@ model File {
   url     String
   addedTo Folder[]
   date    String
+}
+
+model Link {
+  id       String   @id @default(uuid())
+  url      String
+  folder   Folder?  @relation(fields: [folderId], references: [id])
+  folderId String?
+  age      DateTime
 }
 
 model Session {

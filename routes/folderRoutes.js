@@ -11,6 +11,6 @@ router.get("/:id", auth.isAuthenticated, controller.getFolder);
 
 router.post("/:id", controller.createFolder);
 router.post("/:id/delete", controller.deleteFolder);
-router.post('/:id/rename', controller.renameFolder)
+router.post("/:id/rename", controller.renameFolder);
 
 module.exports = router;
