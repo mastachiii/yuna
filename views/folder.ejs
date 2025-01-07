@@ -38,6 +38,10 @@
             <input type="hidden" name="folder" value="<%= folder.id %>" />
             <button>Submit</button>
         </form>
+        <form action="/folders/<%= folder.id %>/share" method="post">
+            <input type="hidden" name="id" value="<%= folder.id %>" />
+            <button>SHARE</button>
+        </form>
     </body>
     <script>
         function checkSize(input) {

@@ -1,4 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient, Prisma } = require("@prisma/client");
 const { format } = require("date-fns");
 const { use } = require("passport");
 
@@ -186,8 +186,23 @@ class File {
     }
 }
 
+class Link {
+    // Set default values for folder & files as skip since user can only exclusively share a folder or a file.
+    async createLink({ expirationDate, folder = Prisma.skip, file = Prisma.skip, url }) {
+        await prisma.link.create({
+            data: {
+                url,
+                folder,
+                file,
+                url,
+            },
+        });
+    }
+}
+
 module.exports = {
     User,
     Folder,
     File,
+    Link
 };
