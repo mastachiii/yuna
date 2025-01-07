@@ -1,10 +1,12 @@
-const { Folder } = require("../model/queries");
+const { Folder, Link } = require("../model/queries");
+const { v4: uuidv4 } = require("uuid");
 
-const db = new Folder();
+const folderDb = new Folder();
+const linkDb = new Link();
 
 async function getFolder(req, res, next) {
     try {
-        const folder = await db.getFolder(req.params.id);
+        const folder = await folderDb.getFolder(req.params.id);
 
         res.render("folder", { folder });
     } catch (err) {
@@ -14,7 +16,7 @@ async function getFolder(req, res, next) {
 
 async function createFolder(req, res, next) {
     try {
-        await db.createSubFolder({ name: req.body.folder, parentFolderId: req.params.id });
+        await folderDb.createSubFolder({ name: req.body.folder, parentFolderId: req.params.id });
 
         res.redirect("");
     } catch (err) {
@@ -24,7 +26,7 @@ async function createFolder(req, res, next) {
 
 async function deleteFolder(req, res, next) {
     try {
-        await db.deleteFolder(req.body.id);
+        await folderDb.deleteFolder(req.body.id);
 
         res.redirect("/");
     } catch (err) {
@@ -34,7 +36,19 @@ async function deleteFolder(req, res, next) {
 
 async function renameFolder(req, res, next) {
     try {
-        await db.renameFolder(req.body);
+        await folderDb.renameFolder(req.body);
+
+        res.redirect("/");
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function shareFolder(req, res, next) {
+    try {
+        const url = `https://localhost:8080/share/${req.user.username}/${uuidv4()}`;
+
+        console.log(req.body)
 
         res.redirect("/");
     } catch (err) {
@@ -47,4 +61,5 @@ module.exports = {
     getFolder,
     deleteFolder,
     renameFolder,
+    shareFolder,
 };

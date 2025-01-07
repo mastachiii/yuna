@@ -39,6 +39,14 @@
             <button>Submit</button>
         </form>
         <form action="/folders/<%= folder.id %>/share" method="post">
+            <label for="date">Expiration date: </label>
+            <select name="date" id="date">
+                <option value="1D">One day</option>
+                <option value="10D">Ten days</option>
+                <option value="1M">1 month</option>
+                <option value="1Y">1 year</option>
+                <option value="Forever">Forever</option>
+            </select>
             <input type="hidden" name="id" value="<%= folder.id %>" />
             <button>SHARE</button>
         </form>

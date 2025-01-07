@@ -198,11 +198,23 @@ class Link {
             },
         });
     }
+
+    async getLink(url) {
+        const contents = await prisma.link.findUnique({
+            where: { url },
+        });
+
+        return contents;
+    }
+
+    async deleteLink(url) {
+        await prisma.link.delete({ where: { url } });
+    }
 }
 
 module.exports = {
     User,
     Folder,
     File,
-    Link
+    Link,
 };
