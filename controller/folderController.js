@@ -21,8 +21,6 @@ async function getPublicFolder(req, res, next) {
 
         const folder = await folderDb.getFolder(req.params.id);
 
-        console.log(req.params)
-
         res.render("folder", { folder });
     } catch (err) {
         next(err);
@@ -33,14 +31,23 @@ async function getFolderShared(req, res, next) {
     try {
         req.session.sharedUrl = `${req.headers.host}${req.originalUrl}`;
 
-        const rootFolder = await linkDb.getLink(req.session.sharedUrl);
+        const link = await linkDb.getLink(req.session.sharedUrl);
 
-        if (!rootFolder) {
+        if (!link) {
             req.session.sharedUrl = "";
+
             return res.redirect("/");
         }
 
-        res.redirect(`/folders/public/${rootFolder.folderId}`);
+        if (new Date() > link.expirationDate) {
+            await linkDb.deleteLink(req.session.sharedUrl);
+
+            req.session.sharedUrl = "";
+
+            return res.json("Link expired");
+        }
+
+        res.redirect(`/folders/public/${link.folderId}`);
     } catch (err) {
         next(err);
     }
@@ -103,5 +110,5 @@ module.exports = {
     renameFolder,
     shareFolder,
     getFolderShared,
-    getPublicFolder
+    getPublicFolder,
 };
