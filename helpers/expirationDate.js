@@ -9,9 +9,22 @@ function expirationDate(expiresAt) {
             break;
 
         case "10D":
-            expirationDate = new Date(Date.now() + 8.64e+8)
+            expirationDate = new Date(Date.now() + 8.64e8);
+            break;
+
+        case "1M":
+            expirationDate = new Date(Date.now() + 2.628e9);
+            break;
+
+        case "1Y":
+            expirationDate = new Date(Date.now() + 3.154e10);
+            break;
+
+        case "Forever":
+            expirationDate = new Date("1/1/9999");
     }
+
     console.log(expirationDate);
 }
 
-expirationDate("10D");
+module.exports = expirationDate

@@ -188,13 +188,13 @@ class File {
 
 class Link {
     // Set default values for folder & files as skip since user can only exclusively share a folder or a file.
-    async createLink({ expirationDate, folder = Prisma.skip, file = Prisma.skip, url }) {
+    async createLink({ expirationDate, folderId = Prisma.skip, fileId = Prisma.skip, url }) {
         await prisma.link.create({
             data: {
                 url,
-                folder,
-                file,
-                url,
+                expirationDate,
+                fileId,
+                folderId,
             },
         });
     }

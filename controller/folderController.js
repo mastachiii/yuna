@@ -1,5 +1,6 @@
 const { Folder, Link } = require("../model/queries");
 const { v4: uuidv4 } = require("uuid");
+const getExpirationDate = require("../helpers/expirationDate");
 
 const folderDb = new Folder();
 const linkDb = new Link();
@@ -9,6 +10,37 @@ async function getFolder(req, res, next) {
         const folder = await folderDb.getFolder(req.params.id);
 
         res.render("folder", { folder });
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function getPublicFolder(req, res, next) {
+    try {
+        if (!req.session.sharedUrl) return res.json("bruh");
+
+        const folder = await folderDb.getFolder(req.params.id);
+
+        console.log(req.params)
+
+        res.render("folder", { folder });
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function getFolderShared(req, res, next) {
+    try {
+        req.session.sharedUrl = `${req.headers.host}${req.originalUrl}`;
+
+        const rootFolder = await linkDb.getLink(req.session.sharedUrl);
+
+        if (!rootFolder) {
+            req.session.sharedUrl = "";
+            return res.redirect("/");
+        }
+
+        res.redirect(`/folders/public/${rootFolder.folderId}`);
     } catch (err) {
         next(err);
     }
@@ -46,9 +78,17 @@ async function renameFolder(req, res, next) {
 
 async function shareFolder(req, res, next) {
     try {
-        const url = `https://localhost:8080/share/${req.user.username}/${uuidv4()}`;
+        const url = `localhost:8080/folders/share/${req.user.username}/${uuidv4()}`;
+        // const expirationDate = getExpirationDate(req.body.date);
+        const expirationDate = new Date(Date.now() + 60000);
 
-        console.log(req.body)
+        await linkDb.createLink({
+            expirationDate,
+            url,
+            folderId: req.body.id,
+        });
+
+        console.log(url);
 
         res.redirect("/");
     } catch (err) {
@@ -62,4 +102,6 @@ module.exports = {
     deleteFolder,
     renameFolder,
     shareFolder,
+    getFolderShared,
+    getPublicFolder
 };
