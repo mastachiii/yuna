@@ -21,13 +21,12 @@ app.set("view engine", "ejs");
 app.use(
     session({
         cookie: {
-            maxAge: 300000,
+            maxAge: 20 * 60 * 1000000,
         },
         secret: process.env.SECRET,
         resave: false,
         saveUninitialized: true,
         store: new PrismaSessionStore(new PrismaClient(), {
-            checkPeriod: 20 * 60 * 1000000,
             dbRecordIdIsSessionId: true,
             dbRecordIdFunction: undefined,
         }),

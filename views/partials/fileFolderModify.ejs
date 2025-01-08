@@ -1,0 +1,11 @@
+<div>
+    <form action="<%= linkDelete %>" method="post">
+        <input type="hidden" name="id" value="<%= id %>" />
+        <button>DELETE</button>
+    </form>
+    <form action="<%= linkRename %>" method="post">
+        <input type="text" name="name" id="name" />
+        <input type="hidden" name="id" value="<%= id %>" />
+        <button>RENAME</button>
+    </form>
+</div>
