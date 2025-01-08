@@ -8,6 +8,6 @@
     <body>
         <% console.log(locals) %>
         <h1><%= file.name %></h1>
-        <a href="<%= file.url %>?download">download file</a>
+        <a href="<%= file.url %>?download=<%= file.name %>">download file</a>
     </body>
 </html>

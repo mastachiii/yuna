@@ -34,12 +34,13 @@ model Folder {
 }
 
 model File {
-  id      String   @id @default(uuid())
-  name    String
-  size    String
-  url     String
-  addedTo Folder[]
-  date    String
+  id        String   @id @default(uuid())
+  name      String
+  size      String
+  extension String
+  url       String
+  addedTo   Folder[]
+  date      String
 }
 
 model Link {

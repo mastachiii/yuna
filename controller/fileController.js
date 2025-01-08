@@ -2,6 +2,7 @@ const { CreateClient, createClient } = require("@supabase/supabase-js");
 const { decode } = require("base64-arraybuffer");
 const { File } = require("../model/queries");
 const { body, validationResult, check } = require("express-validator");
+const getFileExtension = require("../helpers/getFileExt");
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
 const db = new File();
@@ -10,7 +11,7 @@ async function addFile(req, res, next) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(401).send(errors.array());
-
+        console.log(req.file);
         const file = decode(req.file.buffer.toString("base64"));
         const path = `${req.user.id}/${req.file.originalname}`;
 
@@ -23,6 +24,7 @@ async function addFile(req, res, next) {
         await db.addFile({
             name: req.file.originalname,
             size,
+            extension: getFileExtension(req.file.originalname),
             parentFolderId: req.body.folder,
             url: data.publicUrl,
         });
@@ -53,8 +55,21 @@ async function deleteFile(req, res, next) {
     }
 }
 
+async function renameFile(req, res, next) {
+    try {
+        const file = await db.getFile(req.body.id);
+
+        await db.renameFile({ id: req.body.id, name: `${req.body.name}${file.extension}` });
+
+        res.redirect("/");
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
     addFile,
     getFile,
     deleteFile,
+    renameFile,
 };

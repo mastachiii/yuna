@@ -32,6 +32,12 @@
             <input type="hidden" name="id" value="<%= file.id %>" />
             <button>DELETE</button>
         </form>
+        <form action="/files/<%= file.id %>/rename" method="post">
+            <input type="text" name="name" />
+            <input type="hidden" name="id" value="<%= file.id %>" />
+            <button>RENAME</button>
+        </form>
+
         <% }) %>
         <form action="" method="post">
             <label for="folder">New Folder</label>
