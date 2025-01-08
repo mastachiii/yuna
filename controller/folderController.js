@@ -86,8 +86,7 @@ async function renameFolder(req, res, next) {
 async function shareFolder(req, res, next) {
     try {
         const url = `localhost:8080/folders/share/${req.user.username}/${uuidv4()}`;
-        // const expirationDate = getExpirationDate(req.body.date);
-        const expirationDate = new Date(Date.now() + 60000);
+        const expirationDate = getExpirationDate(req.body.date);
 
         await linkDb.createLink({
             expirationDate,

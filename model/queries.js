@@ -1,5 +1,6 @@
 const { PrismaClient, Prisma } = require("@prisma/client");
 const { format } = require("date-fns");
+const { tr } = require("date-fns/locale");
 const { use } = require("passport");
 
 const prisma = new PrismaClient();
@@ -115,6 +116,7 @@ class Folder {
             where: { id },
             include: {
                 subFolders: true,
+                parentFolder: true,
                 files: true,
                 owner: true,
             },

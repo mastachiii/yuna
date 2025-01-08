@@ -1,0 +1,10 @@
+<% function createSubFolderDiv(folder){ %>
+<div><%= folder.name %></div>
+
+<% if (folder.subFolders) { %> <%folder.subFolders.forEach( folder => { %> <%= createSubFolderDiv(folder)%> <%})%> <%} %> <%}%>
+<div>
+    <div>
+        <p><%= folder.name %></p>
+        <% folder.subFolders.forEach( folder => {%> <% createSubFolderDiv(folder) %> <%}) %>
+    </div>
+</div>

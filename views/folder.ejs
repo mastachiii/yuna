@@ -6,9 +6,14 @@
         <title>Document</title>
     </head>
     <body>
+        <%- include("partials/sideBar") %> <% if (folder.parentFolderId) { %>
+        <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
+        <%}%>
+        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
         <h1><%= folder.name %></h1>
         <% folder.subFolders.forEach(folder => {%>
-        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+        <!---->
+        <%- include('partials/folderFileContainer', {link: `/folders/${folder.id}`, name: folder.name, date: folder.date, size: 'X'}) %>
         <form action="/folders/<%= folder.id %>/delete" method="post">
             <input type="hidden" name="id" value="<%= folder.id %>" />
             <button>DELETE</button>
@@ -21,8 +26,8 @@
         </form>
         <% }) %>
         <!---->
-        <% folder.files.forEach(file => { %>
-        <a href="/files/<%= file.id %>"><%= file.name %></a>
+        <% folder.files.forEach(file => { %> <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size,
+        date: file.date}) %>
         <form action="/files/<%= file.id %>/delete" method="post">
             <input type="hidden" name="id" value="<%= file.id %>" />
             <button>DELETE</button>
