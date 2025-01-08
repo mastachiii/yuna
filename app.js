@@ -16,6 +16,7 @@ const files = require("./routes/fileRoutes");
 const app = express();
 
 app.set("view engine", "ejs");
+app.use(express.static(`${__dirname}/public`))
 
 // Middleware
 app.use(
@@ -56,7 +57,7 @@ app.get("/log-out", auth.isAuthenticated, (req, res) => {
 // Error Handling
 app.use((err, req, res, next) => {
     console.log(err);
-    res.json(err);
+    res.render('error');
 });
 
 const PORT = process.env.PORT || 8080;

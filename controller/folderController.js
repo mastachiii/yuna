@@ -1,6 +1,7 @@
 const { Folder, Link } = require("../model/queries");
 const { v4: uuidv4 } = require("uuid");
 const getExpirationDate = require("../helpers/expirationDate");
+const { authenticate } = require("passport");
 
 const folderDb = new Folder();
 const linkDb = new Link();
@@ -9,7 +10,7 @@ async function getFolder(req, res, next) {
     try {
         const folder = await folderDb.getFolder(req.params.id);
 
-        res.render("folder", { folder });
+        res.render("folder", { folder, authenticated: true });
     } catch (err) {
         next(err);
     }
@@ -21,7 +22,7 @@ async function getPublicFolder(req, res, next) {
 
         const folder = await folderDb.getFolder(req.params.id);
 
-        res.render("folder", { folder });
+        res.render("folder", { folder, authenticated: false });
     } catch (err) {
         next(err);
     }
@@ -55,7 +56,7 @@ async function getFolderShared(req, res, next) {
 
 async function createFolder(req, res, next) {
     try {
-        await folderDb.createSubFolder({ name: req.body.folder, parentFolderId: req.params.id });
+        await folderDb.createSubFolder({ name: req.body.name, parentFolderId: req.params.id });
 
         res.redirect("");
     } catch (err) {
@@ -85,6 +86,7 @@ async function renameFolder(req, res, next) {
 
 async function shareFolder(req, res, next) {
     try {
+        console.log(req.body);
         const url = `localhost:8080/folders/share/${req.user.username}/${uuidv4()}`;
         const expirationDate = getExpirationDate(req.body.date);
 

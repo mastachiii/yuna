@@ -24,7 +24,7 @@ function expirationDate(expiresAt) {
             expirationDate = new Date("1/1/9999");
     }
 
-    console.log(expirationDate);
+    return expirationDate;
 }
 
-module.exports = expirationDate
+module.exports = expirationDate;

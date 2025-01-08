@@ -10,6 +10,6 @@ router.get("/:id", auth.isAuthenticated, controller.getFile);
 
 router.post("/", upload.single("file"), controller.addFile);
 router.post("/:id/delete", controller.deleteFile);
-router.post('/:id/rename', controller.renameFile)
+router.post("/:id/rename", controller.renameFile);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 <div>
+    <% if (authenticated) {%>
     <form action="<%= linkDelete %>" method="post">
         <input type="hidden" name="id" value="<%= id %>" />
         <button>DELETE</button>
@@ -8,4 +9,5 @@
         <input type="hidden" name="id" value="<%= id %>" />
         <button>RENAME</button>
     </form>
+    <% } %>
 </div>

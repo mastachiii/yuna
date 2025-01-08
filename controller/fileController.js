@@ -11,7 +11,7 @@ async function addFile(req, res, next) {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(401).send(errors.array());
-        console.log(req.file);
+        console.log(req);
         const file = decode(req.file.buffer.toString("base64"));
         const path = `${req.user.id}/${req.file.originalname}`;
 
