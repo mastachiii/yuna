@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head', {title: 'Yuna | Sign Up', cssPath: ''}) %>
+    <%- include('partials/head', {title: 'Yuna | Sign Up', cssPath: '/styles/signUp.css'}) %>
     <body>
-        <img src="/icons/yuna.svg" alt="" />
-        <form action="" method="post">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" />
-            <label for="email">Email </label>
-            <input type="text" name="email" id="email" />
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" />
-            <label for="password-confirm">Confirm Password</label>
-            <input type="password" name="passwordConfirm" id="passwordConfirm" />
-
-            <button>Submit</button>
-        </form>
+        <div class="sign-up-cnt">
+            <div>
+                <span
+                    ><img src="/icons/yuna.svg" alt="" />
+                    <p>Yuna</p></span
+                >
+                <p>Cat approved file uploader!</p>
+            </div>
+            <form action="" method="post">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" />
+                <label for="email">Email </label>
+                <input type="text" name="email" id="email" />
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" />
+                <label for="password-confirm">Confirm Password</label>
+                <input type="password" name="passwordConfirm" id="passwordConfirm" />
+                <button>Submit</button>
+            </form>
+        </div>
     </body>
 </html>

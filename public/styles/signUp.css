@@ -1,0 +1,45 @@
+.sign-up-cnt {
+    background-color: rebeccapurple;
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    transform: translateY(100%);
+
+    > div {
+        width: 30%;
+        text-align: center;
+        span {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 1rem;
+            font-family: "Pacifico";
+            font-size: 1.5rem;
+            color: white;
+
+            img {
+                width: 7rem;
+                margin-right: 0.6rem;
+            }
+
+            p {
+                /* box-sizing: content-box; */
+                background-color: #65a30d;
+                padding: 4px;
+            }
+        }
+
+        > p {
+            font-size: 1.2rem;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: center;
+    }
+}
