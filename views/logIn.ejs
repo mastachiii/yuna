@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
+    <%- include('partials/head', {title: 'Yuna | Log In', cssPath: 'styles/logIn.css'}) %>
     <body>
-        <form action="" method="post">
-            <label for="username">Username </label>
-            <input type="text" name="username" id="username" />
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" />
-            <button>Submit</button>
-        </form>
+        <% if (locals.error) { %> <% console.log(error) %>
+        <div class="error-cnt">
+            <ul>
+                <li><%= error %></li>
+            </ul>
+        </div>
+        <%} %>
+        <div class="log-in-cnt">
+            <div>
+                <span
+                    ><img src="/icons/yuna.svg" alt="" />
+                    <p>Yuna</p></span
+                >
+                <p>Cat approved file uploader!</p>
+            </div>
+            <form action="" method="post">
+                <label for="username">Username </label>
+                <input type="text" name="username" id="username" />
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" />
+                <button>Submit</button>
+                <a href="/sign-up">Don't have an account?</a>
+            </form>
+        </div>
     </body>
 </html>

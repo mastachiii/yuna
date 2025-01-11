@@ -1,5 +1,14 @@
 function getLogInForm(req, res) {
-    res.render("logIn");
+    let error;
+
+    if (req.session.messages) {
+        error = req.session.messages[0];
+        req.session.messages = []; // Clear out messages so it wont stack
+    }
+
+    if (req.user) res.redirect("/");
+
+    res.render("logIn", { error });
 }
 
 function logInUser(req, res) {

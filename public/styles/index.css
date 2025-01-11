@@ -23,3 +23,76 @@ html {
         font-size: 14px;
     }
 }
+
+.sign-up-cnt,
+.log-in-cnt {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    padding: 4rem;
+    transform: translateY(50%);
+    box-shadow: var(--cnt-box-shadow);
+    border-radius: 3rem;
+
+    > div {
+        width: 30%;
+        text-align: center;
+        span {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 1rem;
+            font-family: "Pacifico";
+            font-size: 1.5rem;
+            color: white;
+
+            img {
+                width: 7rem;
+                margin-right: 0.6rem;
+            }
+
+            p {
+                /* box-sizing: content-box; */
+                background-color: #fcd34d;
+                padding: 4px;
+            }
+        }
+
+        > p {
+            font-size: 1.2rem;
+        }
+    }
+
+    form {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        margin-left: 5rem;
+
+        input {
+            width: 70%;
+            margin-bottom: 1rem;
+            padding: 5px;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        button {
+            width: 15%;
+            padding: 10px;
+            border: solid 2px var(--primary-color);
+            border-radius: 2rem;
+            background: none;
+            cursor: pointer;
+        }
+
+        a {
+            margin-top: 1rem;
+            font-size: 12px;
+            font-style: italic;
+        }
+    }
+}
