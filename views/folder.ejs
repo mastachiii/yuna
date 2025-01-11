@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
+    <%- include('partials/head', {title: `Yuna | ${folder.name}`, cssPath: ''}) %>
     <body>
         <% if (authenticated) { %>
         <form action="" method="post">
@@ -19,24 +15,26 @@
         </form>
         <%}%>
         <!---->
-        <% if (folder.parentFolderId) { %>
-        <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
-        <%}%>
-        <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
-        <h1><%= folder.name %></h1>
-        <% folder.subFolders.forEach(folder => {%>
-        <!---->
-        <%- include('partials/folderFileContainer', {link: `/folders/${folder.id}`, name: folder.name, date: folder.date, size: 'X'}) %>
-        <!---->
-        <%-include('partials/fileFolderModify', {linkDelete: `/folders/${folder.id}/delete`, linkRename: `/folders/${folder.id}/rename`, id:
-        folder.id})%> <% }) %>
-        <!---->
-        <% folder.files.forEach(file => { %>
-        <!---->
-        <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size, date: file.date}) %>
-        <!---->
-        <%- include('partials/fileFolderModify', {linkDelete: `/files/${file.id}/delete`, linkRename: `/files/${file.id}/rename`, id: file.id}) %> <%
-        }) %> <%- include('partials/shareFolderDiv') %>
+        <div class="folderFileContainer">
+            <% if (folder.parentFolderId) { %>
+            <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
+            <%}%>
+            <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+            <h1><%= folder.name %></h1>
+            <% folder.subFolders.forEach((folder, index) => {%>
+            <!---->
+            <%- include('partials/folderFileContainer', {link: `/folders/${folder.id}`, name: folder.name, date: folder.date, size: 'X', btnClass:
+            `folder-${index}`}) %>
+            <!---->
+            <% }) %>
+            <!---->
+            <% folder.files.forEach((file, index) => { %>
+            <!---->
+            <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size, date: file.date, btnClass:
+            `file-${index}`}) %>
+            <!---->
+            <% }) %> <%- include('partials/shareFolderDiv') %>
+        </div>
     </body>
     <script>
         function checkSize(input) {
@@ -49,5 +47,22 @@
                 input.value = null;
             }
         }
+        // Show delete / rename stuff when button is pressed
+        const folderFileDiv = document.querySelector(".folderFileContainer");
+
+        folderFileDiv.addEventListener("click", e => {
+            const [isModifyBtn, divIndex] = e.target.classList;
+
+            if (isModifyBtn !== "modify-btn") return;
+
+            const modifyDiv = document.querySelector(`div.${divIndex}`);
+            const modifyDivs = document.querySelectorAll(".modify-div"); // only display one modify div at a time
+
+            modifyDivs.forEach(div => {
+                div.style.display = "none";
+            });
+
+            modifyDiv.style.display = modifyDiv.style.display === "none" ? "flex" : "none";
+        });
     </script>
 </html>

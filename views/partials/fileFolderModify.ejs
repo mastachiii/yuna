@@ -1,9 +1,10 @@
-<div>
+<div style="display: none" class="modify-div <%= divClass %>">
     <% if (authenticated) {%>
     <form action="<%= linkDelete %>" method="post">
         <input type="hidden" name="id" value="<%= id %>" />
         <button>DELETE</button>
     </form>
+    <% console.log(locals) %>
     <form action="<%= linkRename %>" method="post">
         <input type="text" name="name" id="name" />
         <input type="hidden" name="id" value="<%= id %>" />

@@ -11,4 +11,7 @@
         <p>Date:</p>
         <p><%= date %></p>
     </span>
+    <button class="modify-btn <%= locals.btnClass %>">modify</button>
+    <%-include('fileFolderModify', {linkDelete: `/folders/${folder.id}/delete`, linkRename: `/folders/${folder.id}/rename`, id: folder.id, divClass:
+    btnClass})%>
 </div>
