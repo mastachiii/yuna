@@ -24,14 +24,14 @@
             <% folder.subFolders.forEach((folder, index) => {%>
             <!---->
             <%- include('partials/folderFileContainer', {link: `/folders/${folder.id}`, name: folder.name, date: folder.date, size: 'X', btnClass:
-            `folder-${index}`}) %>
+            `folder-${index}`, id: folder.id}) %>
             <!---->
             <% }) %>
             <!---->
             <% folder.files.forEach((file, index) => { %>
             <!---->
             <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size, date: file.date, btnClass:
-            `file-${index}`}) %>
+            `file-${index}`, id: file.id}) %>
             <!---->
             <% }) %> <%- include('partials/shareFolderDiv') %>
         </div>
@@ -57,12 +57,13 @@
 
             const modifyDiv = document.querySelector(`div.${divIndex}`);
             const modifyDivs = document.querySelectorAll(".modify-div"); // only display one modify div at a time
+            const modifyDivDisplay = modifyDiv.style.display;
 
             modifyDivs.forEach(div => {
                 div.style.display = "none";
             });
 
-            modifyDiv.style.display = modifyDiv.style.display === "none" ? "flex" : "none";
+            modifyDiv.style.display = modifyDivDisplay === "none" ? "flex" : "none";
         });
     </script>
 </html>
