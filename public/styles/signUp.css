@@ -1,10 +1,11 @@
 .sign-up-cnt {
-    background-color: rebeccapurple;
     display: flex;
     width: 50%;
     margin: 0 auto;
-    padding: 2rem;
-    transform: translateY(100%);
+    padding: 4rem;
+    transform: translateY(50%);
+    box-shadow: var(--cnt-box-shadow);
+    border-radius: 3rem;
 
     > div {
         width: 30%;
@@ -37,9 +38,34 @@
     }
 
     form {
+        width: 70%;
         display: flex;
         flex-direction: column;
-        align-self: center;
-        justify-content: center;
+        margin-left: 5rem;
+
+        input {
+            width: 70%;
+            margin-bottom: 1rem;
+            padding: 5px;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        button {
+            width: 15%;
+            padding: 10px;
+            border: solid 2px var(--primary-color);
+            border-radius: 2rem;
+            background: none;
+            cursor: pointer;
+        }
+
+        a {
+            margin-top: 1rem;
+            font-size: 12px;
+            font-style: italic;
+        }
     }
 }
