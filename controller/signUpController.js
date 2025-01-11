@@ -37,7 +37,7 @@ const validateForm = [
         .custom((value, { req }) => {
             return value == req.body.password;
         })
-        .withMessage("The password does not match."),
+        .withMessage("The password does not match"),
 ];
 
 function getSignUpForm(req, res) {
@@ -48,7 +48,8 @@ const addUser = [
     validateForm,
     (req, res, next) => {
         const errors = validationResult(req);
-        if (!errors.isEmpty()) return res.status(401).send(errors.array());
+
+        if (!errors.isEmpty()) return res.status(401).render("signUp", { errors: errors.array() });
 
         bcrypt.hash(req.body.password, 10, async (err, hashedPass) => {
             if (err) next(err);

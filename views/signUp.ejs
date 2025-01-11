@@ -2,6 +2,15 @@
 <html lang="en">
     <%- include('partials/head', {title: 'Yuna | Sign Up', cssPath: '/styles/signUp.css'}) %>
     <body>
+        <% if (locals.errors) { %>
+        <div class="error-cnt">
+            <ul>
+                <% errors.forEach(error => { %>
+                <li><%= error.msg %></li>
+                <%}) %>
+            </ul>
+        </div>
+        <%} %>
         <div class="sign-up-cnt">
             <div>
                 <span
