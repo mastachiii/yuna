@@ -1,0 +1,11 @@
+<nav>
+    <img src="/icons/navLogo.svg" alt="yuna-logo" />
+    <% if (authenticated){ %>
+    <a href="/log-out">Log Out</a>
+    <%} else { %>
+    <div>
+        <a href="/log-in">Log In</a>
+        <a href="/sign-up">Sign Up</a>
+    </div>
+    <%}%>
+</nav>

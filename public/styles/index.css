@@ -3,6 +3,8 @@
 
 :root {
     --primary-color: #111827;
+    --secondary-color: #a8a29e;
+    --hover-color: #fcd34d;
     --cnt-box-shadow: 4px 9px 35px -20px rgba(0, 0, 0, 0.75);
 }
 
@@ -28,7 +30,7 @@ html {
 .log-in-cnt {
     display: flex;
     width: 50%;
-    margin: 0 auto;
+    margin: 0 auto 1rem auto;
     padding: 4rem;
     transform: translateY(50%);
     box-shadow: var(--cnt-box-shadow);
