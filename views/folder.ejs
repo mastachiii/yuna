@@ -9,16 +9,22 @@
         <button class="file-btn">New File</button>
         <%}%>
         <!---->
+        <% console.log(locals) %>
         <div class="folderFileContainer">
             <% if (folder.parentFolderId) { %>
             <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
             <%}%>
+            <!---->
+            <% if (authenticated) { %>
             <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+            <%} else { %>
+            <a href="/folders/public/<%= folder.id %>"><%= folder.name %></a>
+            <%} %>
             <h1><%= folder.name %></h1>
             <% folder.subFolders.forEach((folder, index) => {%>
             <!---->
-            <%- include('partials/folderFileContainer', {link: `/folders/${folder.id}`, name: folder.name, date: folder.date, size: 'X', btnClass:
-            `folder-${index}`, id: folder.id}) %>
+            <%- include('partials/folderFileContainer', {link: authenticated ? `/folders/${folder.id}` : `/folders/public/${folder.id}`, name:
+            folder.name, date: folder.date, size: 'X', btnClass: `folder-${index}`, id: folder.id}) %>
             <!---->
             <% }) %>
             <!---->
