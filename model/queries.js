@@ -196,6 +196,7 @@ class File {
             where: { id },
         });
     }
+
 }
 
 class Link {

@@ -86,7 +86,6 @@ async function renameFolder(req, res, next) {
 
 async function shareFolder(req, res, next) {
     try {
-        console.log(req.body);
         const url = `localhost:8080/folders/share/${req.user.username}/${uuidv4()}`;
         const expirationDate = getExpirationDate(req.body.date);
 
