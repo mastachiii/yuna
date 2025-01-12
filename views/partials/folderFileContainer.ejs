@@ -1,16 +1,11 @@
 <div style="display: flex">
+    <a href="<%= link %>"><%= name %></a>
+    <p><% if (size) { %> <%= size %> <%} else {%> <%= 'X' %> <%}%></p>
     <span>
-        <p>Name:</p>
-        <a href="<%= link %>"><%= name %></a></span
-    >
-    <span>
-        <p>Size:</p>
-        <p><% if (size) { %> <%= size %> <%} else {%> <%= 'X' %> <%}%></p>
-    </span>
-    <span>
-        <p>Date:</p>
         <p><%= date %></p>
+        <div>
+            <button class="modify-btn <%= locals.btnClass %>">modify</button>
+            <%-include('fileFolderModify', {linkDelete: `${link}/delete`, linkRename: `${link}/rename`, id, divClass: btnClass})%>
+        </div>
     </span>
-    <button class="modify-btn <%= locals.btnClass %>">modify</button>
-    <%-include('fileFolderModify', {linkDelete: `${link}/delete`, linkRename: `${link}/rename`, id, divClass: btnClass})%>
 </div>

@@ -25,24 +25,37 @@
                     <img src="/icons/newFolder.svg" alt="" />
                     <p>New Folder</p>
                 </button>
-                <button class="file-btn">Upload File</button>
-                <button class="share-btn">Share</button>
+                <button class="file-btn">
+                    <img src="/icons/newFile.svg" alt="" />
+                    <p>Upload File</p>
+                </button>
+                <button class="share-btn">
+                    <img src="/icons/share.svg" alt="" />
+                    <p>Share</p>
+                </button>
             </div>
             <%}%>
             <h1><%= folder.name %></h1>
-            <% folder.subFolders.forEach((folder, index) => {%>
-            <!---->
-            <%- include('partials/folderFileContainer', {link: authenticated ? `/folders/${folder.id}` : `/folders/public/${folder.id}`, name:
-            folder.name, date: folder.date, size: 'X', btnClass: `folder-${index}`, id: folder.id}) %>
-            <!---->
-            <% }) %>
-            <!---->
-            <% folder.files.forEach((file, index) => { %>
-            <!---->
-            <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size, date: file.date, btnClass:
-            `file-${index}`, id: file.id}) %>
-            <!---->
-            <% }) %>
+            <div>
+                <span>
+                    <p>Name</p>
+                    <p>Size</p>
+                    <p>Date</p>
+                </span>
+                <% folder.subFolders.forEach((folder, index) => {%>
+                <!---->
+                <%- include('partials/folderFileContainer', {link: authenticated ? `/folders/${folder.id}` : `/folders/public/${folder.id}`, name:
+                folder.name, date: folder.date, size: 'X', btnClass: `folder-${index}`, id: folder.id}) %>
+                <!---->
+                <% }) %>
+                <!---->
+                <% folder.files.forEach((file, index) => { %>
+                <!---->
+                <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size, date: file.date, btnClass:
+                `file-${index}`, id: file.id}) %>
+                <!---->
+                <% }) %>
+            </div>
             <!---->
         </div>
     </body>

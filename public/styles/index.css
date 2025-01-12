@@ -12,6 +12,10 @@ html {
     font-family: "Rubik", sans-serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 .error-cnt {
     position: absolute;
     width: 30%;
