@@ -50,8 +50,8 @@
         const deleteBtn = document.querySelectorAll(".delete-btn");
         const folderDialog = document.querySelector(".folder-dialog");
         const fileDialog = document.querySelector(".file-dialog");
-        const renameDialog = document.querySelector(".rename-dialog");
-        const deleteDialog = document.querySelector(".delete-dialog");
+        const renameDialog = document.querySelectorAll(".rename-dialog");
+        const deleteDialog = document.querySelectorAll(".delete-dialog");
         const closeDialogBtn = document.querySelectorAll(".close-dialog-btn");
 
         folderFileDiv.addEventListener("click", e => {
@@ -73,10 +73,16 @@
         folderBtn.addEventListener("click", () => folderDialog.showModal());
         fileBtn.addEventListener("click", () => fileDialog.showModal());
         renameBtn.forEach(btn => {
-            console.log(btn);
+            const id = btn.classList[1];
+            const renameDialog = document.getElementsByClassName(`rename-dialog ${id}`)[0];
+            console.log({ id, renameDialog });
+
             btn.addEventListener("click", () => renameDialog.showModal());
         });
         deleteBtn.forEach(btn => {
+            const id = btn.classList[1];
+            const deleteDialog = document.getElementsByClassName(`delete-dialog ${id}`)[0];
+
             btn.addEventListener("click", () => deleteDialog.showModal());
         });
 
@@ -84,8 +90,8 @@
             btn.addEventListener("click", () => {
                 folderDialog.close();
                 fileDialog.close();
-                renameDialog.close();
-                deleteDialog.close();
+                renameDialog.forEach(dialog => dialog.close());
+                deleteDialog.forEach(dialog => dialog.close());
             });
         });
     </script>

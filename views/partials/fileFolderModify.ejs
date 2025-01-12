@@ -1,7 +1,7 @@
 <div style="display: none" class="modify-div <%= divClass %>">
     <% if (authenticated) {%> <% console.log(locals) %>
-    <button class="delete-btn">DELETE</button>
-    <button class="rename-btn">RENAME</button>
+    <button class="delete-btn <%= id %>">DELETE</button>
+    <button class="rename-btn <%= id %>">RENAME</button>
     <%- include('renameDialog', {linkRename, id}) %> <% } %>
     <!---->
     <%- include('deleteDialog', {linkDelete, id}) %>
