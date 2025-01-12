@@ -30,9 +30,8 @@ html {
 .log-in-cnt {
     display: flex;
     width: 50%;
-    margin: 0 auto 1rem auto;
+    margin: 10% auto 0 auto;
     padding: 4rem;
-    transform: translateY(50%);
     box-shadow: var(--cnt-box-shadow);
     border-radius: 3rem;
 

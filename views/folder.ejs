@@ -1,25 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head', {title: `Yuna | ${folder.name}`,cssPath:'folder.css'})%>
+    <%- include('partials/head', {title: `Yuna | ${folder.name}`,cssPath:'/styles/folder.css'})%>
     <!---->
     <%- include('navBar', {authenticated}) %>
     <body>
-        <% if (authenticated) { %>
-        <button class="folder-btn">New Folder</button>
-        <button class="file-btn">New File</button>
-        <%}%>
         <!---->
-        <% console.log(locals) %>
         <div class="folderFileContainer">
-            <% if (folder.parentFolderId) { %>
-            <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
-            <%}%>
+            <span class="breadcrumbs">
+                <% if (folder.parentFolderId) { %>
+                <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
+                <img src="/icons/next.svg" alt="" />
+                <%}%>
+                <!---->
+                <% if (authenticated) { %>
+                <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
+                <%} else { %>
+                <a href="/folders/public/<%= folder.id %>"><%= folder.name %></a>
+                <%} %>
+            </span>
             <!---->
             <% if (authenticated) { %>
-            <a href="/folders/<%= folder.id %>"><%= folder.name %></a>
-            <%} else { %>
-            <a href="/folders/public/<%= folder.id %>"><%= folder.name %></a>
-            <%} %>
+            <div>
+                <button class="folder-btn">
+                    <img src="/icons/newFolder.svg" alt="" />
+                    <p>New Folder</p>
+                </button>
+                <button class="file-btn">Upload File</button>
+                <button class="share-btn">Share</button>
+            </div>
+            <%}%>
             <h1><%= folder.name %></h1>
             <% folder.subFolders.forEach((folder, index) => {%>
             <!---->
@@ -35,7 +44,6 @@
             <!---->
             <% }) %>
             <!---->
-            <button class="share-btn">SHARE FOLDER</button>
         </div>
     </body>
     <!--DIALOGS-->

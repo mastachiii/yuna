@@ -1,0 +1,44 @@
+.folderFileContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0 0 6rem;
+
+    .breadcrumbs {
+        a {
+            font-size: 1.2rem;
+            color: var(--hover-color);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        img {
+            width: 1rem;
+        }
+    }
+
+    > div {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.4rem;
+
+        button {
+            display: flex;
+            gap: 0.2rem;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            border: none;
+
+            img {
+                width: 1.1rem;
+            }
+        }
+
+        button:first-of-type {
+            color: white;
+            background-color: var(--hover-color);
+        }
+    }
+}
