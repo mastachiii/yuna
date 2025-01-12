@@ -3,16 +3,8 @@
     <%- include('partials/head', {title: `Yuna | ${folder.name}`, cssPath: ''}) %>
     <body>
         <% if (authenticated) { %>
-        <form action="" method="post">
-            <input type="text" name="name" />
-            <input type="hidden" name="id" value="<%= folder.id %>" />
-            <button>SUBMIT</button>
-        </form>
-        <form action="/files" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" onchange="checkSize(this)" />
-            <input type="hidden" name="folder" value="<%= folder.id %>" />
-            <button>submit</button>
-        </form>
+        <button class="folder-btn">New Folder</button>
+        <button class="file-btn">New File</button>
         <%}%>
         <!---->
         <div class="folderFileContainer">
@@ -36,6 +28,9 @@
             <% }) %> <%- include('partials/shareFolderDiv') %>
         </div>
     </body>
+    <%-include('partials/folderDialog', {id: folder.id}) %>
+    <!---->
+    <%- include('partials/fileDialog', {id: folder.id}) %>
     <script>
         function checkSize(input) {
             const UPLOAD_LIMIT = 50 * 1000000;
@@ -49,6 +44,15 @@
         }
         // Show delete / rename stuff when button is pressed
         const folderFileDiv = document.querySelector(".folderFileContainer");
+        const folderBtn = document.querySelector(".folder-btn");
+        const fileBtn = document.querySelector(".file-btn");
+        const renameBtn = document.querySelectorAll(".rename-btn");
+        const deleteBtn = document.querySelectorAll(".delete-btn");
+        const folderDialog = document.querySelector(".folder-dialog");
+        const fileDialog = document.querySelector(".file-dialog");
+        const renameDialog = document.querySelector(".rename-dialog");
+        const deleteDialog = document.querySelector(".delete-dialog");
+        const closeDialogBtn = document.querySelectorAll(".close-dialog-btn");
 
         folderFileDiv.addEventListener("click", e => {
             const [isModifyBtn, divIndex] = e.target.classList;
@@ -64,6 +68,25 @@
             });
 
             modifyDiv.style.display = modifyDivDisplay === "none" ? "flex" : "none";
+        });
+
+        folderBtn.addEventListener("click", () => folderDialog.showModal());
+        fileBtn.addEventListener("click", () => fileDialog.showModal());
+        renameBtn.forEach(btn => {
+            console.log(btn);
+            btn.addEventListener("click", () => renameDialog.showModal());
+        });
+        deleteBtn.forEach(btn => {
+            btn.addEventListener("click", () => deleteDialog.showModal());
+        });
+
+        closeDialogBtn.forEach(btn => {
+            btn.addEventListener("click", () => {
+                folderDialog.close();
+                fileDialog.close();
+                renameDialog.close();
+                deleteDialog.close();
+            });
         });
     </script>
 </html>

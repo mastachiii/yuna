@@ -1,0 +1,10 @@
+<dialog class="file-dialog">
+    <button type="button" class="close-dialog-btn">CLOSE</button>
+    <form action="/files" method="post" enctype="multipart/form-data">
+        <h2>Files</h2>
+        <input type="file" name="file" onchange="checkSize(this)" />
+        <input type="hidden" name="folder" value="<%= folder.id %>" />
+        <button>submit</button>
+    </form>
+</dialog>
+<script></script>

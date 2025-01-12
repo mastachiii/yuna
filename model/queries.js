@@ -106,18 +106,27 @@ class Folder {
                 files: true,
                 owner: true,
             },
+            orderBy: {
+                date: "desc",
+            },
         });
-
-        console.log(folders);
     }
 
     async getFolder(id) {
         const folder = await prisma.folder.findUnique({
             where: { id },
             include: {
-                subFolders: true,
+                subFolders: {
+                    orderBy: {
+                        date: "desc",
+                    },
+                },
                 parentFolder: true,
-                files: true,
+                files: {
+                    orderBy: {
+                        date: "desc",
+                    },
+                },
                 owner: true,
             },
         });
