@@ -1,9 +1,13 @@
 <dialog class="folder-dialog">
-    <button class="close-dialog-btn">CLOSE</button>
     <form action="" method="post">
         <h2>New Folder</h2>
-        <input type="text" name="name" value="New Folder" />
         <input type="hidden" name="id" value="<%= folder.id %>" />
-        <button>Add</button>
+        <div>
+            <input type="text" name="name" value="New Folder" />
+            <span>
+                <button type="button" class="close-dialog-btn">Cancel</button>
+                <button type="submit">Create</button>
+            </span>
+        </div>
     </form>
 </dialog>
