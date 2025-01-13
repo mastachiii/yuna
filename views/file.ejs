@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <% console.log(locals) %> <%- include('partials/head', {title: `Yuna | ${file.name}`, cssPath: '/styles/file.css'}) %>
+    <% console.log(file.addedTo[0].id) %> <%- include('partials/head', {title: `Yuna | ${file.name}`, cssPath: '/styles/file.css'}) %>
     <!---->
     <%- include('navBar', {authenticated}) %>
     <body>
-        <% console.log(locals) %>
-        <h1><%= file.name %></h1>
-        <a href="<%= file.url %>?download=<%= file.name %>">download file</a>
+        <div class="file-container">
+            <% if (authenticated) { %>
+            <a href="/folders/<%= file.addedTo[0].id %>" class="folderLink">Go back</a>
+            <%} else {%>
+            <a href="/folders/public/<%= file.addedTo[0].id %>" class="folderLink">Go back</a>
+            <% } %>
+            <h1><%= file.name %></h1>
+            <a href="<%= file.url %>?download=<%= file.name %>">download file</a>
+        </div>
     </body>
 </html>

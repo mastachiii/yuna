@@ -171,6 +171,9 @@ class File {
     async getFile(id) {
         const file = await prisma.file.findUnique({
             where: { id },
+            include: {
+                addedTo: true,
+            },
         });
 
         return file;
@@ -196,7 +199,6 @@ class File {
             where: { id },
         });
     }
-
 }
 
 class Link {
