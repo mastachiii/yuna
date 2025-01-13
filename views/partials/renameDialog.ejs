@@ -1,9 +1,13 @@
 <dialog class="rename-dialog <%= id %>">
-    <button class="close-dialog-btn">CLOSE</button>
     <form action="<%= linkRename %>" method="post">
-        <h2>Rename</h2>
-        <input type="text" name="name" id="name" />
         <input type="hidden" name="id" value="<%= id %>" />
-        <button>RENAME</button>
+        <h2>Rename</h2>
+        <div>
+            <input type="text" name="name" id="name" />
+            <span>
+                <button class="close-dialog-btn">Cancel</button>
+                <button type="submit">Done</button>
+            </span>
+        </div>
     </form>
 </dialog>

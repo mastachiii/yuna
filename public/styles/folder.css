@@ -84,8 +84,8 @@
                 text-decoration: none;
             }
 
-            p,
-            span {
+            > p,
+            > span {
                 width: 20%;
                 margin: auto;
             }
@@ -125,7 +125,7 @@
                         box-shadow: var(--cnt-box-shadow);
                         background-color: #ffffff;
 
-                        button {
+                        > button {
                             display: flex;
                             align-items: center;
                             padding: 5px;

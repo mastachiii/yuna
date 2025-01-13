@@ -1,4 +1,20 @@
 <dialog class="share-dialog">
-    <button class="close-dialog-btn">CLOSE</button>
-    <%- include('shareFolderDiv', {id}) %>
+    <form action="/folders/<%= id %>/share" method="post">
+        <input type="hidden" name="id" value="<%= id %>" />
+        <h2>Share Folder</h2>
+        <div>
+            <label for="date">Expiration date: </label>
+            <select name="date" id="date">
+                <option value="1D" selected>1 day</option>
+                <option value="10D">10 days</option>
+                <option value="1M">1 month</option>
+                <option value="1Y">1 year</option>
+                <option value="Forever">Forever</option>
+            </select>
+            <span>
+                <button type="button" class="close-dialog-btn">Cancel</button>
+                <button type="submit">Share</button>
+            </span>
+        </div>
+    </form>
 </dialog>

@@ -2,7 +2,11 @@
     <form action="<%= linkDelete %>" method="post">
         <h2>Delete Forever?</h2>
         <input type="hidden" name="id" value="<%= id %>" />
-        <button type="button" class="close-dialog-btn">Cancel</button>
-        <button type="submit">DELETE</button>
+        <div>
+            <span>
+                <button type="button" class="close-dialog-btn">Cancel</button>
+                <button type="submit">Delete</button>
+            </span>
+        </div>
     </form>
 </dialog>

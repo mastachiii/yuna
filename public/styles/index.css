@@ -59,7 +59,6 @@ button {
             }
 
             p {
-                /* box-sizing: content-box; */
                 background-color: #fcd34d;
                 padding: 4px;
             }
@@ -104,12 +103,16 @@ button {
 }
 
 .folder-dialog,
-.file-dialog {
+.file-dialog,
+.share-dialog,
+.rename-dialog,
+.delete-dialog {
     padding: 0 2rem 2rem 2rem;
     border: none;
     border-radius: 1rem;
 
-    input {
+    input,
+    select {
         padding: 6px 8rem 6px 5px;
     }
 
@@ -135,4 +138,21 @@ button {
         font-family: "Rubik", sans-serif;
         font-weight: 600;
     }
+}
+
+.share-dialog {
+    div {
+        label {
+            font-size: 15px;
+        }
+        select {
+            border: none;
+            font-family: "Rubik", sans-serif;
+        }
+    }
+}
+
+.rename-dialog,
+.delete-dialog {
+    padding-bottom: 1rem;
 }
