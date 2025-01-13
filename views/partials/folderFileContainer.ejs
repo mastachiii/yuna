@@ -1,5 +1,8 @@
 <div style="display: flex">
-    <a href="<%= link %>"><%= name %></a>
+    <a href="<%= link %>"
+        ><img src="<%= imgPath %>" alt="" />
+        <%= name %>
+    </a>
     <p><% if (size) { %> <%= size %> <%} else {%> <%= 'X' %> <%}%></p>
     <span>
         <p><%= date %></p>
