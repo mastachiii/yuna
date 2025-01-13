@@ -12,10 +12,6 @@ html {
     font-family: "Rubik", sans-serif;
 }
 
-button {
-    cursor: pointer;
-}
-
 .error-cnt {
     position: absolute;
     width: 30%;
@@ -30,12 +26,17 @@ button {
     }
 }
 
+button {
+    cursor: pointer;
+}
+
 .sign-up-cnt,
 .log-in-cnt {
     display: flex;
     width: 50%;
-    margin: 10% auto 0 auto;
+    margin: 0 auto;
     padding: 4rem;
+    transform: translateY(50%);
     box-shadow: var(--cnt-box-shadow);
     border-radius: 3rem;
 

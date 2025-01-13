@@ -5,6 +5,7 @@
     <%- include('navBar', {authenticated}) %>
     <body>
         <!---->
+        <% console.log(folder.subFolders.length === 0) %>
         <div class="folderFileContainer">
             <span class="breadcrumbs">
                 <% if (folder.parentFolderId) { %>
@@ -36,6 +37,9 @@
             </div>
             <%}%>
             <h1><%= folder.name %></h1>
+            <% if (folder.subFolders.length === 0 && folder.files.length === 0){ %>
+            <h1>empty</h1>
+            <%} else { %>
             <div>
                 <span>
                     <p>Name</p>
@@ -45,7 +49,7 @@
                 <% folder.subFolders.forEach((folder, index) => {%>
                 <!---->
                 <%- include('partials/folderFileContainer', {link: authenticated ? `/folders/${folder.id}` : `/folders/public/${folder.id}`, name:
-                folder.name, date: folder.date, size: 'X', btnClass: `folder-${index}`, id: folder.id, imgPath: '/icons/folder.svg'}) %>
+                folder.name, date: folder.date, size: '-', btnClass: `folder-${index}`, id: folder.id, imgPath: '/icons/folder.svg'}) %>
                 <!---->
                 <% }) %>
                 <!---->
@@ -56,6 +60,8 @@
                 <!---->
                 <% }) %>
             </div>
+
+            <% }%>
             <!---->
         </div>
     </body>
