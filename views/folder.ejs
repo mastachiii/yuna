@@ -5,11 +5,13 @@
     <%- include('navBar', {authenticated}) %>
     <body>
         <!---->
-        <% console.log(folder.subFolders.length === 0) %>
         <div class="folderFileContainer">
             <span class="breadcrumbs">
-                <% if (folder.parentFolderId) { %>
+                <% if (folder.parentFolderId) { %> <% if (authenticated) { %>
                 <a href="/folders/<%= folder.parentFolderId  %>"><%= folder.parentFolder.name %></a>
+                <%} else {%>
+                <a href="/folders/public/<%= folder.parentFolderId %>"><%= folder.parentFolder.name %></a>
+                <% } %>
                 <img src="/icons/next.svg" alt="" />
                 <%}%>
                 <!---->
@@ -55,8 +57,9 @@
                 <!---->
                 <% folder.files.forEach((file, index) => { %>
                 <!---->
-                <%- include('partials/folderFileContainer', {link: `/files/${file.id}`, name: file.name, size: file.size, date: file.date, btnClass:
-                `file-${index}`, id: file.id, imgPath: '/icons/file.svg'}) %>
+                <%- include('partials/folderFileContainer', {link: authenticated ? `/files/${file.id}` : `/files/public/${file.id}`, name: file.name,
+                size: file.size, date: file.date, btnClass: `file-${index}`, id: file.id, imgPath: '/icons/file.svg', parentFolderId:
+                folder.id,authenticated}) %>
                 <!---->
                 <% }) %>
             </div>
@@ -112,31 +115,33 @@
             modifyDiv.style.display = modifyDivDisplay === "none" ? "flex" : "none";
         });
 
-        folderBtn.addEventListener("click", () => folderDialog.showModal());
-        fileBtn.addEventListener("click", () => fileDialog.showModal());
-        shareBtn.addEventListener("click", () => shareDialog.showModal());
-        renameBtn.forEach(btn => {
-            const id = btn.classList[1];
-            const renameDialog = document.getElementsByClassName(`rename-dialog ${id}`)[0];
-            console.log({ id, renameDialog });
+        // Throws error for shared folders if not put inside if statement
+        if (folderBtn) {
+            folderBtn.addEventListener("click", () => folderDialog.showModal());
+            fileBtn.addEventListener("click", () => fileDialog.showModal());
+            shareBtn.addEventListener("click", () => shareDialog.showModal());
+            renameBtn.forEach(btn => {
+                const id = btn.classList[1];
+                const renameDialog = document.getElementsByClassName(`rename-dialog ${id}`)[0];
 
-            btn.addEventListener("click", () => renameDialog.showModal());
-        });
-        deleteBtn.forEach(btn => {
-            const id = btn.classList[1];
-            const deleteDialog = document.getElementsByClassName(`delete-dialog ${id}`)[0];
-
-            btn.addEventListener("click", () => deleteDialog.showModal());
-        });
-
-        closeDialogBtn.forEach(btn => {
-            btn.addEventListener("click", () => {
-                folderDialog.close();
-                fileDialog.close();
-                shareDialog.close();
-                renameDialog.forEach(dialog => dialog.close());
-                deleteDialog.forEach(dialog => dialog.close());
+                btn.addEventListener("click", () => renameDialog.showModal());
             });
-        });
+            deleteBtn.forEach(btn => {
+                const id = btn.classList[1];
+                const deleteDialog = document.getElementsByClassName(`delete-dialog ${id}`)[0];
+
+                btn.addEventListener("click", () => deleteDialog.showModal());
+            });
+
+            closeDialogBtn.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    folderDialog.close();
+                    fileDialog.close();
+                    shareDialog.close();
+                    renameDialog.forEach(dialog => dialog.close());
+                    deleteDialog.forEach(dialog => dialog.close());
+                });
+            });
+        }
     </script>
 </html>

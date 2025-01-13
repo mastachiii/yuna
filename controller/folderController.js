@@ -18,7 +18,7 @@ async function getFolder(req, res, next) {
 
 async function getPublicFolder(req, res, next) {
     try {
-        if (!req.session.sharedUrl) return res.json("bruh");
+        if (!req.session.sharedUrl) res.redirect("/log-in");
 
         const folder = await folderDb.getFolder(req.params.id);
 

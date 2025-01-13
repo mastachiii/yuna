@@ -3,6 +3,8 @@ const { decode } = require("base64-arraybuffer");
 const { File } = require("../model/queries");
 const { body, validationResult, check } = require("express-validator");
 const getFileExtension = require("../helpers/getFileExt");
+const { authenticate } = require("passport");
+const { fi } = require("date-fns/locale");
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_API_KEY);
 const db = new File();
@@ -39,7 +41,21 @@ async function getFile(req, res, next) {
     try {
         const file = await db.getFile(req.params.id);
 
-        res.render("file", { file });
+        console.log(req.params)
+
+        res.render("file", { file, authenticated: true });
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function getFilePublic(req, res, next) {
+    try {
+        if (!req.session.sharedUrl) res.redirect("/log-in");
+
+        const file = await db.getFile(req.params.id);
+
+        res.render("file", { file, authenticated: false });
     } catch (err) {
         next(err);
     }
@@ -72,4 +88,5 @@ module.exports = {
     getFile,
     deleteFile,
     renameFile,
+    getFilePublic,
 };
