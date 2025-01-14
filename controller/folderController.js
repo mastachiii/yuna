@@ -97,8 +97,7 @@ async function shareFolder(req, res, next) {
             folderId: req.body.id,
         });
 
-        alert(`Your folder can now be viewed at ${url}`);
-        res.redirect("/");
+        res.render("share", { folderId: req.body.id, url, authenticated: true });
     } catch (err) {
         next(err);
     }

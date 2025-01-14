@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head', {title: 'Yuna | Share', cssPath: '/styles/share.css'}) %>
+    <!---->
+    <%- include('navBar', {authenticated}) %>
+    <body>
+        <div class="shareContainer">
+            <a href="/folders/<%= folderId %>"> Go back</a>
+            <span>
+                <p>Your folder can now be viewed at:</p>
+                <a href="<%=url %>"><%= url %></a>
+            </span>
+        </div>
+    </body>
+</html>
