@@ -21,7 +21,7 @@ async function addFile(req, res, next) {
 
         const { data } = await supabase.storage.from("yuna").getPublicUrl(path);
 
-        const size = req.file.size > 1000000 ? `${req.file.size / 1000000} MB` : `${req.file.size / 1000} KB`;
+        const size = req.file.size > 1000000 ? `${(req.file.size / 1000000).toFixed(2)} MB` : `${req.file.size / 1000} KB`;
 
         await db.addFile({
             name: req.file.originalname,

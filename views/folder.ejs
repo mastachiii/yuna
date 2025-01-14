@@ -23,7 +23,7 @@
             </span>
             <!---->
             <% if (authenticated) { %>
-            <div>
+            <div class="btn-div">
                 <button class="folder-btn">
                     <img src="/icons/newFolder.svg" alt="" />
                     <p>New Folder</p>
@@ -40,9 +40,9 @@
             <%}%>
             <h1><%= folder.name %></h1>
             <% if (folder.subFolders.length === 0 && folder.files.length === 0){ %>
-            <h1>empty</h1>
+            <p class="empty">Folder is empty</p>
             <%} else { %>
-            <div>
+            <div class="folders">
                 <span>
                     <p>Name</p>
                     <p>Size</p>

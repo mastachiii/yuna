@@ -19,7 +19,7 @@
         }
     }
 
-    > div:first-of-type {
+    .btn-div {
         display: flex;
         gap: 0.5rem;
         margin-top: 0.4rem;
@@ -47,7 +47,7 @@
         }
     }
 
-    > div:nth-of-type(2) {
+    .folders {
         a,
         p {
             margin: auto;
@@ -156,4 +156,9 @@
             }
         }
     }
+}
+
+.empty {
+    margin: 5rem auto 0 auto;
+    font-size: 1.7rem;
 }

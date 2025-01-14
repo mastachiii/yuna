@@ -10,8 +10,17 @@
             <%} else {%>
             <a href="/folders/public/<%= file.addedTo[0].id %>" class="folderLink">Go back</a>
             <% } %>
-            <h1><%= file.name %></h1>
-            <a href="<%= file.url %>?download=<%= file.name %>">download file</a>
+            <div>
+                <img src="/icons/file.svg" alt="" />
+                <h1><%= file.name %></h1>
+            </div>
+            <div>
+                <span></span>
+                <p><b>File size:</b> <%= file.size %></p>
+                <p><b>File type:</b> <%= file.extension %></p>
+                <p><b>Date added:</b> <%= file.date %></p>
+            </div>
+            <a href="<%= file.url %>?download=<%= file.name %>">Download</a>
         </div>
     </body>
 </html>

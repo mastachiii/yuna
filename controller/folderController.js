@@ -33,7 +33,7 @@ async function getFolderShared(req, res, next) {
         req.session.sharedUrl = `${req.headers.host}${req.originalUrl}`;
 
         const link = await linkDb.getLink(req.session.sharedUrl);
-
+        console.log(link, req.session.sharedUrl);
         if (!link) {
             req.session.sharedUrl = "";
 
@@ -56,6 +56,8 @@ async function getFolderShared(req, res, next) {
 
 async function createFolder(req, res, next) {
     try {
+        if (!req.body.name) req.body.name = "New Folder";
+
         await folderDb.createSubFolder({ name: req.body.name, parentFolderId: req.params.id });
 
         res.redirect("");
@@ -95,8 +97,7 @@ async function shareFolder(req, res, next) {
             folderId: req.body.id,
         });
 
-        console.log(url);
-
+        alert(`Your folder can now be viewed at ${url}`);
         res.redirect("/");
     } catch (err) {
         next(err);
