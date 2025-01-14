@@ -88,7 +88,7 @@ async function renameFolder(req, res, next) {
 
 async function shareFolder(req, res, next) {
     try {
-        const url = `localhost:8080/folders/share/${req.user.username}/${uuidv4()}`;
+        const url = `https://yuna-production.up.railway.app/folders/share/${req.user.username}/${uuidv4()}`;
         const expirationDate = getExpirationDate(req.body.date);
 
         await linkDb.createLink({
